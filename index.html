@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OVERDOZED — Wear the Legend</title>
+  <meta name="description" content="OVERDOZED: oversized streetwear tees printed with the legends of Indian epics. Premium wear, customisation available, worldwide shipping." />
+  <meta name="theme-color" content="#0D0C0B" />
+  <meta name="view-transition" content="same-origin" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="assets/img/33-abhimanyu.jpg" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Loading intro: counter 0 → 100, then a curtain wipe -->
+  <div class="intro" aria-hidden="true">
+    <div class="intro__count"><span id="introCount">0</span><sup>%</sup></div>
+    <div class="intro__word">OVERDOZED</div>
+  </div>
+
+  <!-- Grain overlay + scroll progress + custom cursor -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__label">VIEW</span></div>
+
+  <!-- SVG filter used for the lookbook ripple (CSS fallback for WebGL distortion) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="ripple">
+      <feTurbulence id="rippleTurb" type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="2" seed="3" result="noise" />
+      <feDisplacementMap id="rippleDisp" in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
+
+  <header class="nav">
+    <a href="#top" class="nav__logo" aria-label="OVERDOZED home">OVERDOZED</a>
+    <nav aria-label="Primary">
+      <ul class="nav__links">
+        <li><a href="#drop">Drop</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#lookbook">Lookbook</a></li>
+        <li><a href="#story">Story</a></li>
+      </ul>
+    </nav>
+    <div class="nav__actions">
+      <button class="icon-btn theme-toggle" aria-label="Switch colour theme" title="Switch theme">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z"/></svg>
+      </button>
+      <button class="cart-btn magnetic" aria-label="Open cart" aria-controls="cart">
+        Cart <span class="cart-btn__count" aria-live="polite">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- 1. HERO ---------------------------------------------------------- -->
+    <section class="hero" id="top" aria-labelledby="heroTitle">
+      <div class="hero__copy">
+        <p class="eyebrow">Drop 07 · Epics Collection</p>
+        <h1 class="hero__title split" id="heroTitle">
+          <span class="line">Wear</span>
+          <span class="line">the</span>
+          <span class="line accent">Legend</span>
+        </h1>
+        <p class="hero__lede">Oversized tees printed with gods, warriors and the stories that outlived empires. Heavy cotton. Loud backs.</p>
+        <div class="hero__cta">
+          <a href="#drop" class="btn btn--primary magnetic">Shop the Drop</a>
+          <a href="#story" class="btn btn--ghost magnetic">Our story</a>
+        </div>
+      </div>
+
+      <div class="hero__stage">
+        <canvas id="tee3d" aria-label="3D t-shirt you can rotate by moving your mouse" role="img"></canvas>
+        <img class="hero__fallback" src="assets/img/33-abhimanyu.jpg" alt="Black OVERDOZED Abhimanyu tee laid on a manga-print backdrop" width="900" height="1200" fetchpriority="high" />
+        <div class="swatches" role="radiogroup" aria-label="Preview fabric colour">
+          <button class="swatch is-active" role="radio" aria-checked="true" data-color="#111111" style="--c:#111111" aria-label="Ink black"></button>
+          <button class="swatch" role="radio" aria-checked="false" data-color="#EFE8DC" style="--c:#EFE8DC" aria-label="Bone white"></button>
+          <button class="swatch" role="radio" aria-checked="false" data-color="#8E1B14" style="--c:#8E1B14" aria-label="Blood red"></button>
+          <button class="swatch" role="radio" aria-checked="false" data-color="#2B3A55" style="--c:#2B3A55" aria-label="Neel blue"></button>
+          <button class="swatch" role="radio" aria-checked="false" data-color="#4A4B3A" style="--c:#4A4B3A" aria-label="Ash olive"></button>
+        </div>
+        <p class="hero__hint mono">Drag · Move · Pick a colour</p>
+      </div>
+    </section>
+
+    <!-- Marquee: speed reacts to scroll velocity -->
+    <div class="marquee" aria-label="New drop. Limited run. Worldwide shipping. Customisation available.">
+      <div class="marquee__track" aria-hidden="true">
+        <span>NEW DROP</span><i>✦</i><span>LIMITED RUN</span><i>✦</i><span>WORLDWIDE SHIPPING</span><i>✦</i><span>CUSTOMISATION AVAILABLE</span><i>✦</i><span>DM TO ORDER</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- 2. NEW DROP — horizontal rail pinned on vertical scroll ---------- -->
+    <section class="drop" id="drop" aria-labelledby="dropTitle">
+      <div class="drop__pin">
+        <div class="drop__head">
+          <p class="eyebrow">Drop 07</p>
+          <h2 class="section-title split" id="dropTitle"><span class="line">Fresh</span><span class="line">off the press</span></h2>
+          <p class="drop__meta mono"><span id="dropCount">08</span> pieces · scroll →</p>
+        </div>
+        <div class="drop__rail" id="dropRail"></div>
+      </div>
+    </section>
+
+    <!-- Bento: featured collections -->
+    <section class="collections" aria-labelledby="colTitle">
+      <h2 class="section-title split" id="colTitle"><span class="line">Pick your</span><span class="line">pantheon</span></h2>
+      <div class="bento" id="bento"></div>
+    </section>
+
+    <!-- 3. PRODUCT GRID with filters ------------------------------------ -->
+    <section class="shop" id="shop" aria-labelledby="shopTitle">
+      <div class="shop__head">
+        <h2 class="section-title split" id="shopTitle"><span class="line">The full</span><span class="line">archive</span></h2>
+        <p class="mono shop__count" aria-live="polite"><span id="resultCount">0</span> tees</p>
+      </div>
+
+      <form class="filters" id="filters" aria-label="Filter products" onsubmit="return false">
+        <fieldset class="chips" id="catChips">
+          <legend class="mono">Collection</legend>
+        </fieldset>
+        <fieldset class="chips" id="colorChips">
+          <legend class="mono">Colour</legend>
+        </fieldset>
+        <fieldset class="chips" id="sizeChips">
+          <legend class="mono">Size in stock</legend>
+        </fieldset>
+        <button type="reset" class="link-btn mono" id="clearFilters">Clear all</button>
+      </form>
+
+      <ul class="grid" id="grid" role="list"></ul>
+      <p class="empty" id="emptyState" hidden>Nothing matches yet. Try clearing a filter, or DM us for a custom print.</p>
+    </section>
+
+    <!-- 5. LOOKBOOK — editorial asymmetric layout ----------------------- -->
+    <section class="lookbook" id="lookbook" aria-labelledby="lbTitle">
+      <h2 class="section-title split" id="lbTitle"><span class="line">Lookbook</span><span class="line accent">Vol. 07</span></h2>
+      <div class="lb">
+        <figure class="lb__item lb__item--a" data-speed="-0.12">
+          <img loading="lazy" decoding="async" src="assets/img/34-shiva-tandav.jpg" alt="White Shiva Tandav tee spread across a manga collage" width="900" height="1200" />
+          <figcaption class="mono">01 — Tandav</figcaption>
+        </figure>
+        <figure class="lb__item lb__item--b" data-speed="0.18">
+          <img loading="lazy" decoding="async" src="assets/img/31-hanuman.jpg" alt="Hanuman devotion tee shot flat on newsprint" width="900" height="1200" />
+          <figcaption class="mono">02 — Devotion</figcaption>
+        </figure>
+        <blockquote class="lb__quote">
+          <p>“Old stories. <em>New armour.</em>”</p>
+        </blockquote>
+        <figure class="lb__item lb__item--c" data-speed="-0.06">
+          <img loading="lazy" decoding="async" src="assets/img/36-mahabharata.jpg" alt="Mahabharata Krishna tee in bone white" width="900" height="1200" />
+          <figcaption class="mono">03 — Kurukshetra</figcaption>
+        </figure>
+        <figure class="lb__item lb__item--d" data-speed="0.1">
+          <img loading="lazy" decoding="async" src="assets/img/06-design.jpg" alt="Black tee with a hand-painted mandala across the back" width="900" height="844" />
+          <figcaption class="mono">04 — Centre</figcaption>
+        </figure>
+        <figure class="lb__item lb__item--e" data-speed="-0.15">
+          <img loading="lazy" decoding="async" src="assets/img/29-radha-krishna.jpg" alt="Radha Krishna tee in white, eternal love print" width="900" height="1200" />
+          <figcaption class="mono">05 — Eternal</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 6. MANIFESTO — word-by-word reveal on scroll -------------------- -->
+    <section class="story" id="story" aria-labelledby="storyTitle">
+      <p class="eyebrow" id="storyTitle">Manifesto</p>
+      <p class="story__text" id="manifesto">We lost an account of seven thousand overnight. We kept every story. Every tee here carries a legend older than empires: gods who danced the world apart, warriors who fought alone, love that refused to end. We print them big, on heavy cotton, for streets that need louder myths. No algorithm. No reset button. Just the legend, on your back.</p>
+    </section>
+
+    <!-- 7. COUNTDOWN + signup ------------------------------------------ -->
+    <section class="countdown" aria-labelledby="cdTitle">
+      <div class="countdown__inner">
+        <p class="eyebrow">Next drop · Drop 08</p>
+        <h2 class="section-title" id="cdTitle">Doors open in</h2>
+        <div class="clock" role="timer" aria-live="off" id="clock">
+          <div><span data-u="d">00</span><small>Days</small></div>
+          <div><span data-u="h">00</span><small>Hours</small></div>
+          <div><span data-u="m">00</span><small>Min</small></div>
+          <div><span data-u="s">00</span><small>Sec</small></div>
+        </div>
+        <form class="signup" data-signup novalidate>
+          <label for="cdEmail" class="visually-hidden">Email address</label>
+          <input id="cdEmail" type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+          <button class="btn btn--primary magnetic" type="submit">Get early access</button>
+          <p class="signup__msg mono" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- 8. FOOTER --------------------------------------------------------- -->
+  <footer class="footer">
+    <div class="footer__top">
+      <div>
+        <p class="eyebrow">Newsletter</p>
+        <p class="footer__pitch">One email per drop. Nothing else.</p>
+        <form class="signup signup--inline" data-signup novalidate>
+          <label for="ftEmail" class="visually-hidden">Email address</label>
+          <input id="ftEmail" type="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+          <button class="btn btn--primary" type="submit">Join</button>
+          <p class="signup__msg mono" role="status"></p>
+        </form>
+      </div>
+      <ul class="footer__links" aria-label="Social">
+        <li><a href="https://www.instagram.com/overdozed__tees/" target="_blank" rel="noopener">Instagram ↗</a></li>
+        <li><a href="https://www.instagram.com/overdozed__cult/" target="_blank" rel="noopener">Cult ↗</a></li>
+        <li><a href="https://ig.me/m/overdozed__tees" target="_blank" rel="noopener">DM to order ↗</a></li>
+      </ul>
+      <ul class="footer__links mono" aria-label="Info">
+        <li>Premium heavyweight cotton</li>
+        <li>Customisation available</li>
+        <li>Worldwide shipping</li>
+      </ul>
+    </div>
+    <div class="footer__mark" aria-hidden="true">OVERDOZED</div>
+    <p class="footer__legal mono">© <span id="year"></span> OVERDOZED. Wear the legend.</p>
+  </footer>
+
+  <!-- Product detail dialog -->
+  <dialog class="pdp" id="pdp" aria-labelledby="pdpName">
+    <button class="pdp__close icon-btn" aria-label="Close product" data-close>✕</button>
+    <div class="pdp__media">
+      <img id="pdpImg" alt="" width="900" height="900" />
+      <figure class="pdp__mock" aria-label="Colourway preview">
+        <svg viewBox="0 0 200 200" role="img" aria-labelledby="mockTitle">
+          <title id="mockTitle">T-shirt colourway preview</title>
+          <path id="mockTee" d="M64 22 L84 14 Q100 30 116 14 L136 22 L176 44 L162 78 L142 70 L142 186 L58 186 L58 70 L38 78 L24 44 Z" />
+          <text id="mockText" x="100" y="112" text-anchor="middle">OD</text>
+        </svg>
+        <figcaption class="mono">Custom colourway preview</figcaption>
+      </figure>
+    </div>
+    <div class="pdp__info">
+      <p class="eyebrow" id="pdpCat"></p>
+      <h2 id="pdpName" class="pdp__name"></h2>
+      <p class="pdp__price" id="pdpPrice"></p>
+      <p class="pdp__line" id="pdpLine"></p>
+
+      <fieldset class="pdp__group">
+        <legend class="mono">Colourway <span id="pdpColorName"></span></legend>
+        <div class="swatches swatches--pdp" id="pdpSwatches"></div>
+      </fieldset>
+      <fieldset class="pdp__group">
+        <legend class="mono">Size</legend>
+        <div class="sizes" id="pdpSizes"></div>
+      </fieldset>
+      <button class="btn btn--primary btn--block magnetic" id="pdpAdd">Add to cart</button>
+      <p class="mono pdp__note">Shown colourway is the photographed tee. Other colourways printed to order — DM us.</p>
+    </div>
+  </dialog>
+
+  <!-- Cart drawer -->
+  <aside class="cart" id="cart" aria-label="Shopping cart" aria-hidden="true" inert>
+    <div class="cart__scrim" data-close-cart></div>
+    <div class="cart__panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+      <div class="cart__head">
+        <h2 id="cartTitle">Your bag</h2>
+        <button class="icon-btn" aria-label="Close cart" data-close-cart>✕</button>
+      </div>
+      <ul class="cart__list" id="cartList" role="list"></ul>
+      <p class="cart__empty" id="cartEmpty">Your bag is empty. The legends are waiting.</p>
+      <div class="cart__foot">
+        <div class="cart__row"><span>Subtotal</span><strong id="cartSubtotal">₹0</strong></div>
+        <p class="mono cart__small">Shipping worked out on DM. Worldwide.</p>
+        <button class="btn btn--primary btn--block" id="checkout">Checkout via Instagram DM</button>
+        <p class="mono cart__small" id="checkoutMsg" role="status"></p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Libraries (pinned versions) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="js/products.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
