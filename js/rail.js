@@ -53,7 +53,7 @@
               <path d="M4 36 Q30 12 56 36" fill="none" stroke="#7a4a2a" stroke-width="5" stroke-linecap="round"/>
             </svg>
             <span class="rack__tag mono">${inr(p.price)}</span>
-            <span class="rack__garment"><img src="assets/cutout/${p.id}.webp" alt="" loading="lazy" decoding="async" draggable="false"></span>
+            <span class="rack__garment"><img src="assets/cutout/${p.id}.webp" alt="" decoding="async" draggable="false"></span>
           </span>
         </button>
       </li>`).join('');
