@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="assets/img/33-abhimanyu.jpg" />
-  <link rel="stylesheet" href="css/style.css?v=2" />
+  <link rel="stylesheet" href="css/style.css?v=4" />
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -92,6 +92,28 @@
         <span>NEW DROP</span><i>✦</i><span>LIMITED RUN</span><i>✦</i><span>WORLDWIDE SHIPPING</span><i>✦</i><span>CUSTOMISATION AVAILABLE</span><i>✦</i><span>DM TO ORDER</span><i>✦</i>
       </div>
     </div>
+
+    <!-- CLOTHING RAIL — garments hang side-on, turn to face you on hover -->
+    <section class="rack" id="rack" aria-labelledby="rackTitle">
+      <div class="rack__head">
+        <p class="eyebrow">The Rail <span class="rack__sep">|</span> Drop 07</p>
+        <h2 class="rack__title" id="rackTitle">Pick a legend <span class="accent">off the rail.</span></h2>
+      </div>
+      <div class="rack__stage" id="rackStage">
+        <svg class="rack__bar" id="rackBar" aria-hidden="true" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="barMetal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f4f1ea" />
+              <stop offset=".45" stop-color="#9c978e" />
+              <stop offset="1" stop-color="#3a3733" />
+            </linearGradient>
+          </defs>
+          <path id="rackPath" fill="none" stroke="url(#barMetal)" stroke-width="7" stroke-linecap="round" />
+        </svg>
+        <ul class="rack__items" id="rackItems" role="list" aria-label="Tees on the rail. Use arrow keys to move along it."></ul>
+      </div>
+      <p class="rack__hint mono">Drag the rail · Hover to turn · Click to try it</p>
+    </section>
 
     <!-- 2. NEW DROP — horizontal rail pinned on vertical scroll ---------- -->
     <section class="drop" id="drop" aria-labelledby="dropTitle">
@@ -253,6 +275,41 @@
     </div>
   </dialog>
 
+  <!-- Rail close-up: the garment swings in on its hanger -->
+  <dialog class="hang" id="hang" aria-labelledby="hangName">
+    <button class="hang__close icon-btn" aria-label="Back to the rail" data-hang-close>✕</button>
+    <div class="hang__media">
+      <div class="hang__hanger" id="hangHanger">
+        <svg class="hang__hook" viewBox="0 0 120 70" aria-hidden="true">
+          <path d="M60 0 V18 Q60 26 52 26" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+          <path d="M8 62 Q60 22 112 62" fill="none" stroke="#7a4a2a" stroke-width="9" stroke-linecap="round" />
+        </svg>
+        <div class="hang__garment"><img id="hangImg" alt="" width="900" height="900" /></div>
+      </div>
+      <button class="hang__nav hang__nav--prev icon-btn" aria-label="Previous tee" data-hang-step="-1">←</button>
+      <button class="hang__nav hang__nav--next icon-btn" aria-label="Next tee" data-hang-step="1">→</button>
+    </div>
+    <div class="hang__info">
+      <p class="mono hang__count" id="hangCount">01 / 15</p>
+      <h2 class="hang__name" id="hangName"></h2>
+      <p class="hang__price" id="hangPrice"></p>
+      <div class="hang__views" role="tablist" aria-label="View">
+        <button role="tab" aria-selected="true" data-view="full">Full</button>
+        <button role="tab" aria-selected="false" data-view="print">Print</button>
+      </div>
+      <fieldset class="pdp__group">
+        <legend class="mono">Size</legend>
+        <div class="sizes" id="hangSizes"></div>
+      </fieldset>
+      <button class="btn btn--primary btn--block hang__add" id="hangAdd"><span class="hang__spin" aria-hidden="true"></span><span class="hang__label">Add to cart</span></button>
+      <p class="mono hang__msg" id="hangMsg" role="status"></p>
+      <div class="hang__foot">
+        <span id="hangLine"></span>
+        <button class="link-btn mono" id="hangMore">Full details →</button>
+      </div>
+    </div>
+  </dialog>
+
   <!-- Cart drawer -->
   <aside class="cart" id="cart" aria-label="Shopping cart" aria-hidden="true" inert>
     <div class="cart__scrim" data-close-cart></div>
@@ -276,7 +333,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
-  <script src="js/products.js?v=2" defer></script>
-  <script src="js/main.js?v=2" defer></script>
+  <script src="js/products.js?v=4" defer></script>
+  <script src="js/main.js?v=4" defer></script>
+  <script src="js/rail.js?v=4" defer></script>
 </body>
 </html>

@@ -402,3 +402,92 @@ h1, h2, h3 { margin: 0; font-weight: 400; }
   .grain { animation: none; }
   .story__text .w { opacity: 1; }
 }
+
+/* ---------- Clothing rail ---------- */
+.rack { padding: 110px 0 40px; overflow: hidden; }
+.rack__head { text-align: center; padding: 0 var(--gutter); }
+.rack__sep { color: var(--fg-dim); margin: 0 .5em; }
+.rack__title { font: 500 clamp(2.2rem, 5.5vw, 4.6rem)/1 var(--body); letter-spacing: -.035em; }
+.rack__title .accent { color: var(--fg-dim); }
+.rack__stage {
+  --gw: 120px;
+  position: relative; height: clamp(320px, 40vw, 470px); margin-top: 1.5rem;
+  touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: grab;
+}
+.rack__stage.is-dragging { cursor: grabbing; }
+@media (min-width: 900px) { .rack__stage { --gw: 170px; } }
+.rack__bar { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 6px 6px rgba(0,0,0,.35)); }
+.rack__items { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
+.rack__item { position: absolute; left: 0; top: 0; width: 0; will-change: transform; z-index: 1; }
+.rack__item.is-active { z-index: 5; }
+.rack__btn { all: unset; position: absolute; left: calc(var(--gw) / -2); top: -3px; width: var(--gw); cursor: inherit; }
+.rack__btn:focus-visible .rack__garment { outline: 2px solid var(--gold); outline-offset: 6px; border-radius: 8px; }
+.rack__swing { display: block; transform-origin: 50% 0; }
+.rack__hook { display: block; width: 34%; margin: 0 auto; color: var(--fg-dim); }
+.rack__tag {
+  position: absolute; top: 18%; left: 58%; z-index: 2;
+  background: #F7F3EC; color: #0D0C0B; font-size: .6rem; padding: .2rem .4rem; border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3); transform: rotate(6deg); transform-origin: 0 0;
+  transition: opacity .3s, transform .5s var(--ease);
+}
+.rack__garment { display: block; margin-top: -4px; perspective: 700px; }
+.rack__garment img {
+  width: 100%; aspect-ratio: 1; object-fit: contain; pointer-events: none;
+  transform: rotateY(68deg); transform-origin: 50% 0;
+  filter: brightness(.78) drop-shadow(0 10px 12px rgba(0,0,0,.45));
+  transition: transform .7s var(--ease), filter .5s;
+}
+.rack__item.is-active .rack__garment img { transform: rotateY(0) scale(1.22); filter: brightness(1) drop-shadow(0 18px 24px rgba(0,0,0,.5)); }
+.rack__item.is-active .rack__tag { transform: rotate(-4deg) translateY(-6px); }
+.rack__hint { text-align: center; color: var(--fg-dim); margin: 0; padding: 0 var(--gutter); }
+@media (hover: none) { .rack__garment img { transform: rotateY(38deg); } }
+
+/* ---------- Rail close-up ---------- */
+.hang {
+  width: min(1180px, calc(100% - 24px)); max-height: calc(100dvh - 24px); padding: 0; border: 1px solid var(--line);
+  border-radius: 20px; background: var(--bg); color: var(--fg); overflow: auto;
+  display: none; grid-template-columns: 1fr;
+}
+.hang[open] { display: grid; animation: hangIn .5s var(--ease); }
+.hang::backdrop { background: rgba(0,0,0,.72); backdrop-filter: blur(6px); }
+@keyframes hangIn { from { opacity: 0; transform: translateY(24px); } }
+@media (min-width: 860px) { .hang { grid-template-columns: 1.25fr 1fr; } }
+.hang__close { position: absolute; top: 12px; right: 12px; z-index: 3; background: var(--bg); }
+.hang__media { position: relative; background: var(--bg-2); min-height: 360px; display: grid; place-items: start center; overflow: hidden; padding-bottom: 32px; }
+.hang__hanger { position: relative; width: min(84%, 480px); padding-top: 64px; transform-origin: 50% 0; }
+.hang__hanger::before { content: ""; position: absolute; left: 50%; top: 0; width: 2px; height: 66px; background: var(--fg-dim); transform: translateX(-50%); }
+.hang__hanger.is-swinging { animation: swingIn 1.6s cubic-bezier(.3,.6,.3,1); }
+@keyframes swingIn { 0% { transform: rotate(-11deg); } 30% { transform: rotate(7deg); } 55% { transform: rotate(-3.5deg); } 78% { transform: rotate(1.4deg); } 100% { transform: rotate(0); } }
+.hang__hook { display: block; width: 26%; margin: 0 auto -10px; color: var(--fg-dim); }
+.hang__garment { display: block; overflow: hidden; }
+.hang__garment img {
+  width: 100%; aspect-ratio: 1; object-fit: contain;
+  filter: drop-shadow(0 24px 30px rgba(0,0,0,.5));
+  transition: transform .7s var(--ease);
+}
+.hang.is-print .hang__garment img { transform: scale(1.9) translateY(6%); }
+.hang__nav { position: absolute; bottom: 14px; background: var(--bg); }
+.hang__nav--prev { left: 14px; }
+.hang__nav--next { left: 62px; }
+.hang__info { padding: clamp(20px, 4vw, 48px); display: flex; flex-direction: column; gap: 1rem; justify-content: center; }
+.hang__count { color: var(--fg-dim); margin: 0; }
+.hang__name { font: 500 clamp(1.8rem, 3.6vw, 2.8rem)/1 var(--body); letter-spacing: -.03em; }
+.hang__price { font: 600 1.05rem var(--mono); margin: 0; }
+.hang__views { display: flex; gap: 1.2rem; }
+.hang__views button { background: none; border: 0; padding: .2rem 0; color: var(--fg-dim); font: 500 .9rem var(--body); border-bottom: 2px solid transparent; }
+.hang__views button[aria-selected="true"] { color: var(--fg); border-color: var(--fg); }
+.hang__add { position: relative; }
+.hang__add.is-busy { background: var(--fg-dim); border-color: var(--fg-dim); pointer-events: none; }
+.hang__spin { display: none; width: 14px; height: 14px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin .7s linear infinite; }
+.hang__add.is-busy .hang__spin { display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.hang__msg { min-height: 1.1em; margin: 0; color: var(--accent); }
+.hang__foot { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--fg-dim); }
+/* The rail sits in a bone-white "showroom" band so black tees read clearly. */
+.rack {
+  --fg: #0D0C0B; --fg-dim: #5A544B; --accent: #C41E12; --line: rgba(13,12,11,.16);
+  background: radial-gradient(120% 80% at 50% 40%, #F7F3EC, #E4DCCD); color: var(--fg);
+}
+.rack__bar { filter: drop-shadow(0 6px 6px rgba(0,0,0,.18)); }
+.rack__garment img { filter: brightness(.9) drop-shadow(0 10px 12px rgba(0,0,0,.25)); }
+.rack__item.is-active .rack__garment img { filter: brightness(1) drop-shadow(0 18px 24px rgba(0,0,0,.3)); }

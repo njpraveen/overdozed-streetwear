@@ -517,6 +517,9 @@
     io.observe(canvas);
   }
 
+  /* ---------- shared API for rail.js ---------- */
+  window.OD = { cart, openPDP, inr, lenis, RM, FINE };
+
   /* ---------- boot ---------- */
   renderGrid();
   magnetize();
