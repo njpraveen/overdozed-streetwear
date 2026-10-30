@@ -44,11 +44,16 @@
     const count = $('#introCount');
     document.body.classList.add('is-loading');
     return new Promise((resolve) => {
-      if (RM || !hasGSAP) {
-        intro.remove(); document.body.classList.remove('is-loading'); resolve(); return;
-      }
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true; intro.remove(); document.body.classList.remove('is-loading'); resolve();
+      };
+      if (RM || !hasGSAP) return finish();
+      // Safety net: never let the loader trap the page if animation frames stall.
+      setTimeout(finish, 5000);
       const obj = { v: 0 };
-      gsap.timeline({ onComplete: () => { intro.remove(); resolve(); } })
+      gsap.timeline({ onComplete: finish })
         .to(obj, { v: 100, duration: 1.6, ease: 'power2.inOut', onUpdate: () => (count.textContent = Math.round(obj.v)) })
         .add(() => document.body.classList.remove('is-loading'))
         .to(intro, { clipPath: 'inset(0 0 100% 0)', duration: 0.9, ease: 'expo.inOut' });
